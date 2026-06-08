@@ -8,8 +8,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": false,
-      "cwd": "/home/vyom/Desktop/dsa/variables",
-      "program": "/home/vyom/Desktop/dsa/variables/build/Debug/outDebug",
+      "cwd": "/home/vyom/Desktop/dsa/pointers",
+      "program": "/home/vyom/Desktop/dsa/pointers/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [
