@@ -1,0 +1,5 @@
+---
+triple:          'arm64-apple-darwin'
+binary-path:     '/Users/vyom/Desktop/vyom-codes/strivers/basic-maths/output/armstrong-nums'
+relocations:     []
+...
