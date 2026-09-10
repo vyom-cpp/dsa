@@ -36,6 +36,16 @@ void print(Node* head){
     cout << endl;
 }
 
+int lengthOfLL(Node* head){
+    Node* temp = head;
+    int count = 0;
+    while(temp != nullptr){
+        count++;
+        temp = temp->next;
+    }
+    return count+1;
+}
+
 // TC => O(length) + O(length - k); Worst Case => O(2 * length) when k = 1
 // SC => O(1)
 Node* brute(Node* head, int k){
@@ -74,23 +84,54 @@ Node* brute(Node* head, int k){
 // k = 2
 // Take a fast pointer pointing head; and move two steps ahead; for example from 1 to move to 3
 // Now take a slow pointer pointing head; and move both fast and slow pointer simultaneously two more steps, the moment you reach next == NULL with fast pointer, stop, the slow pointer will be at the previous node that is to be deleted
-Node* optimal(Node* head, int k){
-    Node* fast = head;
-    Node* slow = head;
-    while(k != 0){
-        fast = fast->next;
-        k--;
-    }
+// Node* optimal(Node* head, int k){
+//     Node* fast = head;
+//     Node* slow = head;
+//     while(k != 0){
+//         fast = fast->next;
+//         k--;
+//     }
+//     // what if fast = size of ll, which tells to delete the head of the linked list; check it out from brute force part, and also check for the edge cases, if k = 0;
+//     if(k == lengthOfLL(head)){
+//         Node* newHead = head->next;
+//         delete head;
+//         return newHead; 
+//     }
 
-    while(fast->next != nullptr){   // here I put it as (fast != nullptr) in while condition and the output was 1, 2, 3, 4, 5
-        slow = slow->next;
-        fast = fast->next;
+//     while(fast->next != nullptr){   // here I put it as (fast != nullptr) in while condition and the output was 1, 2, 3, 4, 5
+//         slow = slow->next;
+//         fast = fast->next;
+//     }
+//     Node* dltNode = slow->next;
+//     slow->next = slow->next->next;
+//     delete dltNode;
+//     return head;
+// }
+
+Node* optimal(Node* head, int n) {
+        Node* dummy = new Node(0, head);
+        Node* fast = dummy;
+        Node* slow = dummy;
+
+        while (n > 0 && fast != nullptr) {
+            fast = fast->next;
+            n--;
+        }
+
+        while (fast->next != nullptr) {
+            slow = slow->next;
+            fast = fast->next;
+        }
+
+        Node* dltNode = slow->next;
+        slow->next = slow->next->next;
+        delete dltNode;
+
+        Node* newHead = dummy->next;
+        delete dummy;
+        
+        return newHead;
     }
-    Node* dltNode = slow->next;
-    slow->next = slow->next->next;
-    delete dltNode;
-    return head;
-}
 
 int main() {
     vector<int> arr1 = {1, 2, 3, 4, 5, 6}; 
