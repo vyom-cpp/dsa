@@ -61,10 +61,58 @@ Node* oddEven(Node* head){
     return head;
 }
 
+// this runs into segmentation fault, below is the fixed solution
+// Node* oddEvenOptimal(Node* head){
+//     if (head == nullptr || head->next == nullptr) {
+//         return head;
+//     }
+//     Node* odd = head; 
+//     Node* even = head->next; 
+//     Node* evenHead = head->next;
+
+//     while(even != nullptr && even->next != nullptr){
+//         odd->next = odd->next->next;
+//         even->next = even->next->next;
+
+//         odd = odd->next;
+//         even = even->next;
+//     }
+//     odd->next = evenHead;
+//     return head;
+// }
+
+Node* oddEvenOptimal(Node* head) {
+    if (head == nullptr || head->next == nullptr) {
+        return head;
+    }
+    
+    Node* odd = head;
+    Node* even = head->next;
+    Node* evenHead = head->next;
+    
+
+    while (even != nullptr && even->next != nullptr) {
+        odd->next = even->next;      
+        odd = odd->next;             
+        
+        even->next = odd->next;     
+        even = even->next;          
+    }
+    
+    odd->next = evenHead;
+    return head;
+}
+
+
 int main() {
     vector<int> arr = {1, 4, 3, 2, 5, 6};
     Node* head1 = convertArr2LL(arr);
     head1 = oddEven(head1);
     print(head1);
+
+    vector<int>aeee = {};
+    Node* head2 = convertArr2LL(aeee);
+    head2 = oddEvenOptimal(head2);
+    print(head2);
     return 0;
 }
