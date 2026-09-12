@@ -1,1 +1,9 @@
 output
+program.dSYM
+*.out
+a.out
+program
+.DS_Store
+.vscode
+*.json
+output
